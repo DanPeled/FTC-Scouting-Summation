@@ -81,7 +81,7 @@ function App() {
     let isUsingTeamProp = false;
     selectedTeamData.forEach(row => {
       Object.keys(row).forEach(key => {
-        if (key !== "" && key.length != 0 && key !== "__EMPTY") {
+        if (key !== "" && key.length != 0 && key !== "__EMPTY" && key !== "הערות (:") {
         if (key !== "Timestamp" && key !== "Email Address" && key !== "מקצה") {
           if (key === " האם הרובוט השתמש באלמנט קבוצתי (TEAM PROP)") {
             isUsingTeamProp = true;
@@ -270,7 +270,7 @@ function App() {
               <thead>
                 <tr>
                   {Object.keys(excelData[0]).map((key) => (
-                    key !== "Timestamp" && key !== "Email Address" && key !== "__EMPTY" && (
+                    key !== "Timestamp" && key !== "Email Address" && key !== "__EMPTY" && key !== "הערות (:" && (
                       <th key={key}>{key}</th>
                     )
                   ))}
@@ -285,7 +285,7 @@ function App() {
                   return (
                     <tr key={index}>
                       {Object.keys(individualExcelData).map((key) => (
-                        key !== "Timestamp" && key !== "Email Address" && key !== "__EMPTY" && (
+                        key !== "Timestamp" && key !== "Email Address" && key !== "__EMPTY" && key !== "הערות (:" && (
                           <td key={key}>{individualExcelData[key]}</td>
                         )
                       ))}
