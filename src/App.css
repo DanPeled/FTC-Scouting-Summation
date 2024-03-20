@@ -1,38 +1,138 @@
-.App {
-  text-align: center;
+/* General styles */
+body {
+  background-color: #2e2e2e;
+  /* Darker background */
+  color: white;
+  /* Default text color */
+  font-family: Arial, sans-serif;
+  /* Set a fallback font */
 }
 
+/* Center align the content of .App */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* Adjust to viewport height */
+  font-size: calc(10px + 2vmin);
+}
+
+/* Styles for the spinning logo */
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
+  /* Adjust logo size */
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: spin 20s linear infinite;
+    /* Simplified animation */
   }
 }
 
+/* Header styles */
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  /* Make the header full-width */
 }
 
+/* Link styles */
 .App-link {
   color: #61dafb;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Table styles */
+.table {
+  border: 1px solid #666;
+  font-size: 13px;
+  background-color: #4d5440;
+  /* Darker background color */
+  color: white;
+  /* Text color */
+  width: 100%;
+  /* Make the table full-width */
+  border-collapse: collapse;
+  /* Collapse table borders */
+}
+
+th,
+td {
+  border: 1px solid #666;
+  padding: 8px;
+  /* Add padding to cells */
+  text-align: center;
+  /* Center align text */
+}
+
+th {
+  background-color: #333;
+  /* Dark background color */
+  font-weight: bold;
+}
+
+/* Form styles */
+form {
+  margin-bottom: 20px;
+  /* Add space below the form */
+}
+
+h3 {
+  margin-top: 10px;
+  text-align: center;
+  /* Remove default margin */
+}
+
+/* Button styles */
+button {
+  background-color: #333;
+  /* Dark background color */
+  color: white;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 3px;
+  margin-bottom: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, font-size 0.3s;
+}
+
+button:hover {
+  background-color: #555;
+  /* Darker background color on hover */
+  font-size: 18px;
+}
+
+/* Select styles */
+select {
+  border: 3px solid rgb(45, 40, 40);
+  background-color: rgb(59, 52, 52);
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  /* Adjust padding */
+  width: 100%;
+  /* Make select element full-width */
+}
+
+option {
+  font-weight: bold;
+}
+
+ul {
+  text-align: center;
+  list-style-type: none;
+}
+.chart {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
