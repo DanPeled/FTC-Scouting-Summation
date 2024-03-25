@@ -77,66 +77,75 @@ function App() {
 
     const nonNaNValues = {};
     const counts = {};
-
+    let skip = false;
     let isUsingTeamProp = false;
     selectedTeamData.forEach(row => {
+      let continueCalculating;
+      skip = false;
+      console.log(row["האם הרובוט תיפקד"]);
+      if (row["האם הרובוט תיפקד"] != "כן") {
+        skip = true;
+      }
       Object.keys(row).forEach(key => {
         if (key !== "" && key.length != 0 && key !== "__EMPTY" && key !== "הערות (:") {
-        if (key !== "Timestamp" && key !== "Email Address" && key !== "מקצה") {
-          if (key === " האם הרובוט השתמש באלמנט קבוצתי (TEAM PROP)") {
-            isUsingTeamProp = true;
-          }
-          const value = row[key];
-          if (key === "האם הרובוט שם פיקסל סגול על הקו הנכון") {
-            const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * (isUsingTeamProp ? 20 : 10));
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          } else if (key === "האם הרובוט שם פיקסל צהוב בברקוד  הנכון") {
-            const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * (isUsingTeamProp ? 20 : 10));
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          } else if (key === "באיזה קו נפל המטוס") {
-            const distance = (parseFloat(value));
-            const distancesMap = {
-              0: 0,
-              1: 30,
-              2: 20,
-              3: 10
-            };
-            const score = (nonNaNValues[key] || 0) + (parseFloat(distancesMap[distance]));
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          } else if (key === "(5-20P) האם הרובוט נתלה או חנה") {
-            let pts = 0;
-            if (value == "נתלה (20)") {
-              pts = 20;
-            } else if (value == "חנה (5))") {
-              pts = 5;
+          if (key !== "Timestamp" && key !== "Email Address" && key !== "מקצה" && !skip) {
+            
+            if (key === " האם הרובוט השתמש באלמנט קבוצתי (TEAM PROP)") {
+              isUsingTeamProp = true;
             }
-            const score = (nonNaNValues[key] || 0) + (pts);
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          } else if (key === "(5P) האם הרובוט חנה_1") {
-            const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * 5);
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          } else if (key === "(5P) האם הרובוט חנה") {
-            const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * 5);
-            nonNaNValues[key] = score;
-            counts[key] = (counts[key] || 0) + 1;
-          }
-          else if (!isNaN(value)) {
-            // Extracting the number inside parentheses with 'p' next to it
-            const match = key.match(/\((\d+)p\)/i);
-            if (match) {
-              let multiplier = parseInt(match[1]);
-              nonNaNValues[key] = (nonNaNValues[key] || 0) + (parseFloat(value) * multiplier);
-            } else {
-              nonNaNValues[key] = (nonNaNValues[key] || 0) + parseFloat(value);
+            const value = row[key];
+            if (key === "האם הרובוט שם פיקסל סגול על הקו הנכון") {
+              const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * (isUsingTeamProp ? 20 : 10));
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } else if (key === "האם הרובוט שם פיקסל צהוב בברקוד  הנכון") {
+              const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * (isUsingTeamProp ? 20 : 10));
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } else if (key === "באיזה קו נפל המטוס") {
+              const distance = (parseFloat(value));
+              const distancesMap = {
+                0: 0,
+                1: 30,
+                2: 20,
+                3: 10
+              };
+              const score = (nonNaNValues[key] || 0) + (parseFloat(distancesMap[distance]));
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } else if (key === "(5-20P) האם הרובוט נתלה או חנה") {
+              let pts = 0;
+              if (value == "נתלה (20)") {
+                pts = 20;
+              } else if (value == "חנה (5))") {
+                pts = 5;
+              }
+              const score = (nonNaNValues[key] || 0) + (pts);
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } else if (key === "(5P) האם הרובוט חנה_1") {
+              const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * 5);
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } else if (key === "(5P) האם הרובוט חנה") {
+              const score = (nonNaNValues[key] || 0) + (parseFloat(value === "כן" ? 1 : 0) * 5);
+              nonNaNValues[key] = score;
+              counts[key] = (counts[key] || 0) + 1;
+            } 
+
+
+            else if (!isNaN(value)) {
+              // Extracting the number inside parentheses with 'p' next to it
+              const match = key.match(/\((\d+)p\)/i);
+              if (match) {
+                let multiplier = parseInt(match[1]);
+                nonNaNValues[key] = (nonNaNValues[key] || 0) + (parseFloat(value) * multiplier);
+              } else {
+                nonNaNValues[key] = (nonNaNValues[key] || 0) + parseFloat(value);
+              }
+              counts[key] = (counts[key] || 0) + 1;
             }
-            counts[key] = (counts[key] || 0) + 1;
           }
-        }
         }
       });
     });
